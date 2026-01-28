@@ -46,7 +46,6 @@ Identile is a web-based tool that generates unique visual identicons from text i
 - Salt value input for hash variation
 - Color scheme options:
   - Auto (based on hash)
-  - Custom base color picker (optional enhancement)
 
 ### 5. Preview and Display
 - Real-time preview of generated identicon
@@ -56,6 +55,7 @@ Identile is a web-based tool that generates unique visual identicons from text i
 ### 6. Download Functionality
 - Download generated identicon as PNG image
 - Filename format: `identile-{input-text}.png`
+- Sanitize filename to remove unsafe characters and trim length
 - Preserve selected size in downloaded image
 
 ### 7. User Interface
@@ -110,9 +110,11 @@ src/
 5. Scale up to target size using nearest-neighbor interpolation
 6. Render to Canvas
 
+Pattern tables for center/cross/turn-cross/slash must match the Go reference implementation.
+
 ### Color Scheme
 - Use HSV color space for vibrant colors
-- Hue: 0-255 mapped to 0-360 degrees
+- Hue: 0-255 treated as degrees (0-255)
 - Saturation: 0-31 mapped to 0-100%
 - Value: Fixed at 100% for brightness
 - Triad colors: +120° and +240° from base hue
@@ -132,6 +134,7 @@ src/
 
 ### Error Handling
 - Handle empty input gracefully
+- Show an empty canvas when input is empty
 - Validate size inputs
 - Show appropriate error messages
 

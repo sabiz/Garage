@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import IdentileGenerator from '../components/identile/IdentileGenerator.vue';
+
+export const tool = {
+  name: 'Identile',
+  path: '/identile',
+  description: 'Generate unique icon patterns from any text, just like an Identicon.'
+};
+
+const title = tool.name;
+const description = tool.description;
+---
+
+<Layout title={title}>
+  <div class="min-h-full bg-gradient-to-br from-slate-50 to-slate-100 p-6 sm:p-10">
+    <main class="mx-auto max-w-5xl">
+      <header class="mb-8 text-center">
+        <h1 class="text-4xl font-bold text-slate-900">{title}</h1>
+        <p class="mt-2 text-slate-600">
+          {description}
+        </p>
+      </header>
+
+      <div class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-slate-200">
+        <IdentileGenerator client:only />
+      </div>
+    </main>
+  </div>
+</Layout>
