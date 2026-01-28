@@ -9,6 +9,12 @@ This project provides various web tools on a single page.
 3. Place requirement documentation as Markdown files within each feature directory
 4. Implement features according to the documented requirements
 
+## Global Specifications
+The following specifications apply to all pages except where noted otherwise:
+
+1. **Navigation**: Each tool page must include a link to return to the top page
+2. **Rounded Corners**: When using rounded corners with Tailwind CSS, use the `sm` size (`rounded-sm`)
+
 ## Directory Structure
 ```
 doc/

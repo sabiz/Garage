@@ -61,7 +61,7 @@ function makeControlInputs(): ControlInputs | null {
       <input
         id="identile-text"
         type="text"
-        class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-slate-400 focus:outline-none"
+        class="mt-1 w-full rounded-sm border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-slate-400 focus:outline-none"
         v-model="text"
         placeholder="Enter text"
       />
@@ -72,7 +72,7 @@ function makeControlInputs(): ControlInputs | null {
       <input
         id="identile-salt"
         type="text"
-        class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-slate-400 focus:outline-none"
+        class="mt-1 w-full rounded-sm border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-slate-400 focus:outline-none"
         v-model="salt"
         placeholder="Add salt for variation"
       />
@@ -82,7 +82,7 @@ function makeControlInputs(): ControlInputs | null {
       <label class="block text-sm font-medium text-slate-700" for="identile-algorithm">Hash Algorithm</label>
       <select
         id="identile-algorithm"
-        class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-slate-400 focus:outline-none"
+        class="mt-1 w-full rounded-sm border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-slate-400 focus:outline-none"
         v-model="algorithm"
       >
         <option value="md5">MD5</option>
@@ -98,7 +98,7 @@ function makeControlInputs(): ControlInputs | null {
       <label class="block text-sm font-medium text-slate-700" for="identile-size">Icon Size</label>
       <select
         id="identile-size"
-        class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-slate-400 focus:outline-none"
+        class="mt-1 w-full rounded-sm border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-slate-400 focus:outline-none"
         v-model="sizePreset"
       >
         <option value="64">64 px</option>
@@ -116,7 +116,7 @@ function makeControlInputs(): ControlInputs | null {
         type="number"
         min="32"
         max="1024"
-        class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-slate-400 focus:outline-none"
+        class="mt-1 w-full rounded-sm border border-slate-200 px-3 py-2 text-slate-900 shadow-sm focus:border-slate-400 focus:outline-none"
         v-model="customSize"
       />
       <p v-if="sizeError" class="mt-1 text-sm text-rose-600">{{ sizeError }}</p>

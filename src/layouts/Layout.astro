@@ -3,10 +3,12 @@ import '../styles/global.css'
 
 interface Props {
     title?: string;
+    showBackLink?: boolean;
 }
 
-const { title } = Astro.props;
+const { title, showBackLink = true } = Astro.props;
 const pageTitle = title ? `${title} | Garage` : 'Garage';
+const isTopPage = !title;
 ---
 
 <!doctype html>
@@ -18,6 +20,16 @@ const pageTitle = title ? `${title} | Garage` : 'Garage';
     </head>
     <body class="h-full w-full m-0">
         <slot />
+        {showBackLink && !isTopPage && (
+            <div class="fixed bottom-6 left-6">
+                <a
+                    href="/"
+                    class="inline-flex items-center gap-2 rounded-sm bg-white px-4 py-2 text-sm font-medium text-slate-600 shadow-md ring-1 ring-slate-200 transition-colors hover:text-slate-900 hover:shadow-lg"
+                >
+                    ← Back to Top
+                </a>
+            </div>
+        )}
     </body>
 </html>
 

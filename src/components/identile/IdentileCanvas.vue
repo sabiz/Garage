@@ -33,7 +33,7 @@ defineExpose({ canvasRef });
   <div class="flex flex-col items-center gap-4">
     <canvas
       ref="canvasRef"
-      class="rounded-xl border border-slate-200 bg-white shadow-sm"
+      class="rounded-sm border border-slate-200 bg-white shadow-sm"
       :width="size"
       :height="size"
       role="img"
