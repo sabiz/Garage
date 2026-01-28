@@ -11,7 +11,6 @@ const props = defineProps<Props>();
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 
 function render() {
-  console.log('IdentileCanvas render called with code:', props.code, 'and size:', props.size);
   if (!canvasRef.value){
     return;
   }
