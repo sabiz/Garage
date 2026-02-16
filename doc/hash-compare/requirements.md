@@ -13,6 +13,7 @@ Provide a web tool that calculates hash values from two inputs (file or text) an
   - SHA-384
   - SHA-512
   - RIPEMD-160
+  - BLAKE3
 - Default selection must be MD5.
 
 ### 2. Dual Inputs (Left / Right)
@@ -53,8 +54,8 @@ Provide a web tool that calculates hash values from two inputs (file or text) an
 ## Technical Requirements
 - Implement the tool using Astro only.
 - Complete all hash processing on the client side.
-- Use Web Crypto API whenever available.
-- For RIPEMD-160, provide a compatible implementation for environments where Web Crypto API does not support it.
+- Implement all supported hash algorithms using WebAssembly.
+- Use `hash-wasm` as the WebAssembly implementation library for MD5, SHA-1, SHA-256, SHA-384, SHA-512, RIPEMD-160, and BLAKE3.
 
 ## Error Handling
 - If required input is missing, do not run calculation and show a clear message.
