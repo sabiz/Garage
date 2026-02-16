@@ -1,4 +1,4 @@
-import CryptoJS from 'crypto-js';
+import { md5, sha1, sha256, sha512 } from 'hash-wasm';
 
 export type HashAlgorithm = 'md5' | 'sha1' | 'sha256' | 'sha512';
 
@@ -9,21 +9,18 @@ const HASH_BYTE_INDICES: Record<HashAlgorithm, [number, number, number, number]>
   sha512: [0, 17, 49, 63]
 };
 
-const HASH_FUNCTIONS: Record<HashAlgorithm, (value: string) => CryptoJS.lib.WordArray> = {
-  md5: CryptoJS.MD5,
-  sha1: CryptoJS.SHA1,
-  sha256: CryptoJS.SHA256,
-  sha512: CryptoJS.SHA512
+const HASH_FUNCTIONS: Record<HashAlgorithm, (value: string) => Promise<string>> = {
+  md5,
+  sha1,
+  sha256,
+  sha512
 };
 
-function wordArrayToBytes(wordArray: CryptoJS.lib.WordArray): number[] {
+function hexToBytes(hex: string): number[] {
   const bytes: number[] = [];
-  const { words, sigBytes } = wordArray;
 
-  for (let i = 0; i < sigBytes; i += 1) {
-    const word = words[Math.floor(i / 4)];
-    const byte = (word >> (24 - (i % 4) * 8)) & 0xff;
-    bytes.push(byte);
+  for (let i = 0; i < hex.length; i += 2) {
+    bytes.push(Number.parseInt(hex.slice(i, i + 2), 16));
   }
 
   return bytes;
@@ -50,10 +47,10 @@ function wordArrayToBytes(wordArray: CryptoJS.lib.WordArray): number[] {
  * - SHA256: bytes at indices [0, 9, 16, 31]
  * - SHA512: bytes at indices [0, 17, 49, 63]
  */
-export function computeHashCode(text: string, salt: string, algorithm: HashAlgorithm): number {
+export async function computeHashCode(text: string, salt: string, algorithm: HashAlgorithm): Promise<number> {
   const input = JSON.stringify({ text, salt });
-  const hash = HASH_FUNCTIONS[algorithm](input);
-  const bytes = wordArrayToBytes(hash);
+  const hashHex = await HASH_FUNCTIONS[algorithm](input);
+  const bytes = hexToBytes(hashHex);
   const [b0, b1, b2, b3] = HASH_BYTE_INDICES[algorithm].map((index) => bytes[index] ?? 0);
 
   return (((b0 << 24) | (b1 << 16) | (b2 << 8) | b3) >>> 0);

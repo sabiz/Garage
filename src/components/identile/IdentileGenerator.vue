@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { ref, watch } from 'vue';
 import IdentileCanvas from './IdentileCanvas.vue';
 import IdentileControls from './IdentileControls.vue';
 import type { ControlInputs } from './IdentileControls.vue';
@@ -11,12 +11,37 @@ function onControlsUpdate(value: ControlInputs) {
   controlInputs.value = value;
 }
 
-const hashCode = computed(() => {
-  if (!controlInputs.value || controlInputs.value.text.length === 0){
-    return null;
-  }
-  return computeHashCode(controlInputs.value.text, controlInputs.value.salt, controlInputs.value.algorithm);
-});
+const hashCode = ref<number | null>(null);
+const hashError = ref<string | null>(null);
+let activeHashRequest = 0;
+
+watch(
+  controlInputs,
+  async (value) => {
+    const requestId = ++activeHashRequest;
+    hashError.value = null;
+
+    if (!value || value.text.length === 0) {
+      hashCode.value = null;
+      return;
+    }
+
+    try {
+      const nextHashCode = await computeHashCode(value.text, value.salt, value.algorithm);
+      if (requestId !== activeHashRequest) {
+        return;
+      }
+      hashCode.value = nextHashCode;
+    } catch (error) {
+      if (requestId !== activeHashRequest) {
+        return;
+      }
+      hashCode.value = null;
+      hashError.value = error instanceof Error ? error.message : String(error);
+    }
+  },
+  { immediate: true }
+);
 
 const canvasComponent = ref<InstanceType<typeof IdentileCanvas> | null>(null);
 
@@ -70,6 +95,9 @@ function downloadImage() {
         >
           Download PNG
         </button>
+        <p v-if="hashError" class="text-sm text-rose-600">
+          Failed to compute hash: {{ hashError }}
+        </p>
       </div>
     </div>
   </div>
