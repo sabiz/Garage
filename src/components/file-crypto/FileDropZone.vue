@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { validateFileSize, formatFileSize } from '../../utils/file-crypto/file-handler';
+import { validateFileSize} from '../../utils/file-crypto/file-handler';
+import { formatFileSize } from '../../utils/file';
 
 interface Props {
   modelValue?: File | null;
