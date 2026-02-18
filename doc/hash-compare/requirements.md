@@ -22,13 +22,7 @@ Provide a web tool that calculates hash values from two inputs (file or text) an
   1. File input via drag-and-drop
   2. Direct text input / paste
 
-### 3. Clipboard Import
-- Provide a clipboard import action for each side.
-- If clipboard data is text, import as text.
-- If clipboard data is an image, use the image byte data as hash input.
-- Show a confirmation dialog before processing clipboard data (including a warning for large data).
-
-### 4. Hash Calculation and Comparison
+### 3. Hash Calculation and Comparison
 - A single "Calculate Hash" action must hash both sides with the currently selected algorithm.
 - Output format must be uppercase hexadecimal.
 - Show "Match" when both hashes are identical, otherwise show "Mismatch".
@@ -43,8 +37,6 @@ Provide a web tool that calculates hash values from two inputs (file or text) an
 - The page must include:
   - Algorithm selector
   - Left and right input areas
-  - Left and right clipboard import buttons
-  - Hash calculation button
   - Left and right hash output areas
   - Match/mismatch result area
 - Support responsive layout (mobile and desktop).
@@ -52,14 +44,12 @@ Provide a web tool that calculates hash values from two inputs (file or text) an
 - Include a navigation link at the top to return to the top page.
 
 ## Technical Requirements
-- Implement the tool using Astro only.
+- Implement the tool using Astro for the page shell and Vue 3 for interactive components.
 - Complete all hash processing on the client side.
 - Implement all supported hash algorithms using WebAssembly.
 - Use `hash-wasm` as the WebAssembly implementation library for MD5, SHA-1, SHA-256, SHA-384, SHA-512, RIPEMD-160, and BLAKE3.
 
 ## Error Handling
-- If required input is missing, do not run calculation and show a clear message.
-- If clipboard format is unsupported, notify the user.
 - If file reading fails and text fallback is used, make that behavior visible to the user.
 - If hash calculation fails, show an explicit error and keep the UI ready for retry.
 
