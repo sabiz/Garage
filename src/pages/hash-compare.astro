@@ -1,5 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import ToolLayout from '../layouts/ToolLayout.astro';
 import HashCompareComponent from '../components/hash-compare/HashCompare.vue';
 
 export const tool = {
@@ -7,22 +7,8 @@ export const tool = {
   path: '/hash-compare',
   description: 'Calculate and compare hash values from two inputs.'
 };
-
-const title = tool.name;
-const description = tool.description;
 ---
 
-<Layout title={title}>
-  <div class="min-h-full bg-gradient-to-br from-slate-50 to-slate-100 p-6 sm:p-10">
-    <main class="mx-auto max-w-6xl">
-      <header class="mb-8 text-center">
-        <h1 class="text-4xl font-bold text-slate-900">{title}</h1>
-        <p class="mt-2 text-slate-600">{description}</p>
-      </header>
-
-      <div class="rounded-sm bg-white p-6 shadow-lg ring-1 ring-slate-200">
-        <HashCompareComponent client:load />
-      </div>
-    </main>
-  </div>
-</Layout>
+<ToolLayout title={tool.name} description={tool.description} maxWidth="max-w-6xl">
+  <HashCompareComponent client:load />
+</ToolLayout>

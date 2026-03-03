@@ -1,0 +1,14 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+import TimerApp from '../components/timer/TimerApp.vue';
+
+export const tool = {
+  name: 'Timer',
+  path: '/timer',
+  description: 'Countdown timer and alarm with audio notification.'
+};
+---
+
+<ToolLayout title={tool.name} description={tool.description} maxWidth="max-w-2xl">
+  <TimerApp client:only="vue" />
+</ToolLayout>
