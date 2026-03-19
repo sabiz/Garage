@@ -1,0 +1,14 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+import RastorApp from '../components/rastor/RastorApp.vue';
+
+export const tool = {
+  name: 'Rastor',
+  path: '/rastor',
+  description: 'Generate random strings with configurable character sets.',
+};
+---
+
+<ToolLayout title={tool.name} description={tool.description}>
+  <RastorApp client:only="vue" />
+</ToolLayout>
